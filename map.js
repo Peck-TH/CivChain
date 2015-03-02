@@ -3,6 +3,7 @@ var map;
 var graphic;
 var currLocation;
 var watchId;
+var graphicsArray = [];
 
 var long;
 var lat;
@@ -27,11 +28,30 @@ lat = "45.5017";
       "esri/dijit/LocateButton",
       "esri/geometry/Point", 
         "esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleLineSymbol",
-        "esri/graphic", "esri/Color", "dojo/domReady!"
+        "esri/graphic", "esri/Color", "dojo/domReady!",
+		//Geometry Modules
+  "esri/geometry/Geometry",
+  "esri/geometry/Polyline",
+  "esri/geometry/Polygon",
+ 
+  //Graphic & Style Modules
+  "esri/graphic",
+  "esri/symbols/SimpleFillSymbol",
+  "esri/InfoTemplate",
+ 
+  "dojo/domReady!",
+  "esri/geometry" 
     ], function(
       Map, LocateButton, Point,
         SimpleMarkerSymbol, SimpleLineSymbol,
-        Graphic, Color
+        Graphic, Color, //Geometry Hooks
+    Geometry,
+    Polyline, 
+    Polygon,
+ 
+    //Graphic & Style Hooks
+    SimpleFillSymbol,
+    InfoTemplate
     )  {
 
       map = new Map("map", {
@@ -57,7 +77,7 @@ lat = "45.5017";
         function initFunc(map) {
           if( navigator.geolocation ) {  
             navigator.geolocation.getCurrentPosition(zoomToLocation, locationError);
-            watchId = navigator.geolocation.watchPosition(showLocation, locationError);
+            //watchId = navigator.geolocation.watchPosition(showLocation, locationError); //Turns off watchPosition when commented
           } else {
             alert("Browser doesn't support Geolocation. Visit http://caniuse.com to see browser support for the Geolocation API.");
           }
@@ -92,7 +112,10 @@ lat = "45.5017";
           addGraphic(pt);
           map.centerAndZoom(pt, 15);
         }
-
+	    
+		
+		
+		
         function showLocation(location) {
           //zoom to the users location and add a graphic
           var pt = new Point(location.coords.longitude, location.coords.latitude);
@@ -123,3 +146,11 @@ lat = "45.5017";
 function findClosest() {
 	alert("No Locations loaded!");
 }
+
+
+function addPoint() {
+          
+		  var newPoint = new esri.geometry.Point(-73.5524, 45.5049);
+          alert("something happened");
+		  	  
+        }
